@@ -1,0 +1,16 @@
+04.11.2019
+
+####################################################
+# k-mean
+# Author: Yahya Guezide
+#
+# A Algorithm to Cluster csv Data
+#
+####################################################
+
+dependency:
+	cluster.h
+	observation.h
+
+
+
