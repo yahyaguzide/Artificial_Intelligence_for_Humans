@@ -43,17 +43,32 @@ _Bool CSV_AddData( csv *cs, list *data ){
 	List_AddTail( &csv->l, data );
 }
 
-// NOTE: would be better if i return just a list, the User can decide what he want's to do with it
+
 // TODO: find a clean way to open and close a stream
-int CSV_ReadLine( FILE *f, char *buffer, int lenght ){
-	int c, lines = 0;
+int CSV_Read( csv *cs, FILE *f, int length ){
+	if( !cs || !f || length < 1 )
+		return -1;
 
-	for(; FgetchLine(f, buffer, length ) == -1; lines++ ){
-		while( *buffer != '\0' ){
-			
+	int lineIndex = 0;
+	char line[length], *start, *end, *attr;
+	List *l;
+
+	for(; FgetchLine(f, line, length ) != -1; lineIndex++ ){
+		if( !(l = (List*)malloc(sizof(List))) )
+			break;
+
+		for(int attrIndex= cs->attrNum; attrIndex > 0 && *start != '\0'; attrIndex--, end++){
+			if( *end == ',' || *end == '\0' ){
+				if( !(attr = (char*)malloc(sizeof(char)*(int)(end-start))) ){
+					List_Free(l);
+					return lineIndex;
+				}
+
+				start = end;			
+			}
 		}
-
-
-		CSV_AddData( cs,  );
 	}
+
+	return lineIndex;
+
 }
