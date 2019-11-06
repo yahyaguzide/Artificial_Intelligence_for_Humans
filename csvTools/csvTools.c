@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "include/linkedList.h"
+#include "include/fgetcher.h"
 
 /**************************************************
 //  csvTools.c
@@ -36,10 +37,23 @@ _Bool CSV_AddData( csv *cs, list *data ){
 
 	if( csv->attrNum < List_GetLength(data) ){
 		for( int i= attrNum - List_GetLength(data); i > 0; i-- )
-			List_Delete( List_GetElem( List_GetLength(data) ) );// Delete Tail dif( attrNum, List_GetLength(l) ) times
+			List_Delete( List_GetElem( List_GetLength(data)-1 ) );// Delete Tail dif( attrNum, List_GetLength(l) ) times
 	}
 
-	List_AddHead( &csv->l, data );
+	List_AddTail( &csv->l, data );
 }
 
+// NOTE: would be better if i return just a list, the User can decide what he want's to do with it
+// TODO: find a clean way to open and close a stream
+int CSV_ReadLine( FILE *f, char *buffer, int lenght ){
+	int c, lines = 0;
 
+	for(; FgetchLine(f, buffer, length ) == -1; lines++ ){
+		while( *buffer != '\0' ){
+			
+		}
+
+
+		CSV_AddData( cs,  );
+	}
+}

@@ -12,7 +12,8 @@ typedef struct _csv{
 void CSV_Init(csv*);
 csv* CSV_Create();
 
-csv* 
+csv* CSV_AddData(csv*, list*); 
+int csv_ReadLine(FILE*);
 
 
 #endif
