@@ -43,9 +43,35 @@ _Bool CSV_AddData( csv *cs, list *data ){
 	List_AddTail( &csv->l, data );
 }
 
+List* CSV_ReadData( FILE *f, char div, char *buffer, int length ){
+	List *list= (List*)malloc( sizeof(List) );
+
+	if( !f || !buffer || !list || length <= 0 )
+		return NULL;
+
+	// Get next Line
+	FgetchLine( f, buffer, length );
+	char *start, *end;
+	for( int i= 0; *end != '\0' && i < length; i++ ){
+		_Bool isString= 0; // Check if line only consist of Numbers
+		if( !isdigit(*end) )
+			isString = 1;
+
+		if( *end == div ){
+			char *s= (char*)malloc(sizeof(char) * (int)(end-start) );
+			if( !s ){
+			
+			}
+
+
+			List_AddTail( list,  );
+		}
+	}
+
+}
 
 // TODO: find a clean way to open and close a stream
-int CSV_Read( csv *cs, FILE *f, int length ){
+int CSV_Read( csv *cs, FILE *f, int length, char div ){
 	if( !cs || !f || length < 1 )
 		return -1;
 
@@ -58,8 +84,11 @@ int CSV_Read( csv *cs, FILE *f, int length ){
 			break;
 
 		for(int attrIndex= cs->attrNum; attrIndex > 0 && *start != '\0'; attrIndex--, end++){
-			if( *end == ',' || *end == '\0' ){
+			if( *end == div || *end == '\0' ){// one attribut was read in
+				// TODO: 				
+
 				if( !(attr = (char*)malloc(sizeof(char)*(int)(end-start))) ){
+					// malloc could not reserve space, Free the Last list and return listIndex
 					List_Free(l);
 					return lineIndex;
 				}
