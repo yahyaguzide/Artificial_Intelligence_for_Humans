@@ -11,4 +11,27 @@
 //
 ***************************************************/
 
+void csvElem_Init( csvElement *celem ){
+	celem->data = NULL;
+	celem->length= 0;
+}
 
+csvElement* csvElem_Create(){
+	csvElement *celem = (csvElement*)malloc(sizeof(csvElement));
+	if( !celem )
+		return NULL;
+
+	csvElem_Init(celem);
+	return celem;
+}
+
+csvElement* csvElem_Create( list *l ){
+	csvElement *celem = (csvElement*)malloc(sizeof(csvElement));
+	list *cl = (list*)malloc(sizeof(
+	if( !l || !celem )
+		return NULL;
+
+	csvElem_Init(celem);
+	celem->data = l;
+	return celem;
+}

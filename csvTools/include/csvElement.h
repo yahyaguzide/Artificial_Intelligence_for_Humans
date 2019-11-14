@@ -4,19 +4,20 @@
 #include "linkedList.h"
 
 typedef struct _csvElement{
-	list data;
+	list *data;
 	int length;
 }csvElement;
 
-csvElem_Init(csvElement*);
+void csvElem_Init(csvElement*);
 
-//NOTE: list will be copyed
-csvElem_Create(list, length);
+csvElement* csvElem_Create();
+csvElement* csvElem_Create(list*);
 
-csvElem_Update(list);
-csvElem_Add(void*);
+void csvElem_Update(csvElement*, list*);
+void csvElem_Add(csvElement, void*);
 //TODO: think over Delete
 csvElem_Delete(int);
+cavElem_Free(csvElement*);
 
 
 #endif
