@@ -1,0 +1,31 @@
+21.11.2019
+
+########################################################
+# csv
+#
+# Author: Yahya Guezide
+#
+# csv Read and Write
+# Can Read CSV data files and Write them out as file
+# csv structures can be changed
+#
+########################################################
+
+Structure..
+    <csv>
+    <csvElement>
+    <csvAttribute>
+    </csvAttribute>
+    </csvElement>
+    </csv>
+
+
+csvAttribute:
+    struct->{
+        char type;
+        void *data;
+        ->*next;
+    }
+
+    Can create struct that point to a Memory with the Size of a Integer Float Double or a SafeString.
+    To reserve such memory it will requier a char that tells it how much memory should be allocated.
