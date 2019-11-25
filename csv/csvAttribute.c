@@ -7,8 +7,7 @@
 //
 // date: 21.11.2019
 // name: Yahya Guezide
-// Simple attribute in a csv Element,
-// csvAtribute is similar to a linked List
+// Simple attribute in a csv Element
 //
 *****************************************************************/
 
@@ -17,7 +16,6 @@ void csvAttribute_Init( csvattribute *csvAtt, char type ){
         return;
 
     csvAtt->type = type;
-    csvAtt->next = NULL;
 
     switch(type){
         case i:
@@ -35,8 +33,10 @@ void csvAttribute_Init( csvattribute *csvAtt, char type ){
         case f:
              csvAtt->data = (float*)malloc(sizeof(float));
              break;
+        case c:
+        	 csvAtt->data = (char*)malloc(sizeof(char));
         case s:
-             //Nothing to do
+             csvAtt->data = (sstring*)malloc(sizeof(sstring));
              break;
         default:
             csvAtt->type = 'e';   
@@ -44,7 +44,6 @@ void csvAttribute_Init( csvattribute *csvAtt, char type ){
     }
 }
 
-// I actually don't know how dangerous it is to use so many void pointer!!!
 csvattribute *csvAttribute_Create( char type ){
     csvattribute *csva = (csvattribute*)malloc(sizeof(csvattribute));
     
@@ -57,7 +56,7 @@ void csvAttribute_Free( csvattribute *csva ){
         // do nothing, Attribute is corrupt
         return;   
     }else if( csva->type == 's' ){
-        // NOTE: Till a Safe Free function is writen, on Hiatus
+		SString_Free( csv->data );
     }else{
         if( csva->data )
             free(csva->data;
