@@ -1,9 +1,9 @@
 #include <stdlib.h>
 
-#include  "include/csvAttribute.h"
+#include  "include/csvAtribute.h"
 
 /*****************************************************************
-//  csvAttribute
+//  csvAtribute
 //
 // date: 21.11.2019
 // name: Yahya Guezide
@@ -11,12 +11,14 @@
 //
 *****************************************************************/
 
-void csvAttribute_Init( csvattribute *csvAtt, char type ){
+void csvAtribute_Init( csvAtribute *csvAtt, char type ){
     if( !csvAtt )
         return;
 
     csvAtt->type = type;
 
+
+	//TODO: Move out to Create
     switch(type){
         case i:
             csvAtt->data = (int*)malloc(sizeof(int));
@@ -44,14 +46,18 @@ void csvAttribute_Init( csvattribute *csvAtt, char type ){
     }
 }
 
-csvattribute *csvAttribute_Create( char type ){
-    csvattribute *csva = (csvattribute*)malloc(sizeof(csvattribute));
+csvAtribute *csvAtribute_Create( char type ){
+    csvAtribute *csva = (csvAtribute*)malloc(sizeof(csvAtribute));
     
-    csvAttribute_Init(csva);
+    csvAtribute_Init(csva);
     return csva;
 }
 
-void csvAttribute_Free( csvattribute *csva ){
+
+void csvAttribute_Set( csvAttribute *csva, void *data ){
+}
+
+void csvAtribute_Free( csvAtribute *csva ){
     if( csva->type == 'e' ){
         // do nothing, Attribute is corrupt
         return;   

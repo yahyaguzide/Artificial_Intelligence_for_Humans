@@ -1,5 +1,5 @@
-#ifndef CSVATTRIBUTE_H
-#define CSVATTRIBUTE_H
+#ifndef csvAtribute_H
+#define csvAtribute_H
 
 #include "safeString.h"
 
@@ -8,20 +8,21 @@
 
 // NOTE: User is responsible to decide which Attr is which
 // unfortunately i cant think of a way to test out 
-typedef struct _csvAttribute{
+typedef struct _csvAtribute{
     char type;
     void *data;
-}csvattribute;
+}csvAtribute;
 
 // NOTE: Init and Create will need a second parameter,
 // to determine which type is given
-void csvAttribute_Init(csvattribute*, char);
-csvattribute* csvAttribute_Create(char);
+void csvAtribute_Init(csvAtribute*, char);
+csvAtribute* csvAtribute_Create(char);
 
 
-// NOTE: This Function is very dangerous, hence it looks for a ASCII-NULL
-// If ASCII-NULL was not set at the end of string Free will go out of bounds
-void csvAttribute_Free(csvattribute*);
+void csvAttribute_Set(csvAttribute*, void*);
+void* csvAttribute_Update(csvAttribute*, void*);
+
+void csvAtribute_Free(csvAtribute*);
 
 
 #endif
